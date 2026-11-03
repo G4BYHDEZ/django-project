@@ -26,6 +26,11 @@ SECRET_KEY = 'django-insecure-8oeru4%rdi#90##lsm0qsdr(9b0-a8*1!dt2&r0inr3i2$=d3v
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
@@ -42,10 +47,12 @@ BASE_APPS = [
 THIRD_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
 ]
 
 OWN_APPS = [
-    'products',
+    'users',
+    'products.apps.ProductsConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -59,6 +66,7 @@ INSTALLED_APPS = BASE_APPS + THIRD_APPS + OWN_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -146,3 +154,6 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+#USERS
+AUTH_USER_MODEL = 'users.User'
